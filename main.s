@@ -39,7 +39,7 @@ main:
     lw       ra, 16(sp)         # restaura ra
     lw       fp, 12(sp)         # restaura fp
     addi     sp, sp, 16         # libera el marco del main 
-L:  j        L                  # bucle infinito
+    jr       ra                 # bucle infinito
 
 # ----------------------- FUNCION BUCKET ----------------------
     .globl bucket
@@ -51,7 +51,18 @@ bucket:
 
     lw       tp,0(a0)           # tp = a[0]
     mv       t0,a1              # t0 = 10
-    jal     getMax              # llamar a función get Max
+    jal      getMax             # llamar a función get Max
+    lw       a1,-32(fp)         # restablece a1
+    lw       a0,-36(fp)         # restablece a0
+    lw       t3,-16(fp)         # t3 = max
+
+    
+    
+
+
+    
+
+
     jr      ra                  # devuelve el control a la funcion
 
 # ----------------------- FUNCION BUCKET ----------------------
@@ -73,6 +84,6 @@ for:    lw      t0,-24(fp)          # cargar i
         lw      tp,-16(fp)          # cargar max
         blt     t0,tp,for           # si a[i] < max entonces salta a for 
         sw      t0,-16(fp)          # max = a[i]
+        lw      t0,-16(fp)          # max = a[i]
         j       for                 # salta a jump
-R:      mv      a0,a0               # guarda en valor de retorno en a0
-        jr      ra                  # devuelve el control a la funcion
+R:      jr      ra                  # devuelve el control a la funcion
