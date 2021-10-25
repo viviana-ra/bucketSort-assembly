@@ -52,7 +52,7 @@ bucket:
     lw       tp,0(a0)           # tp = a[0]
     mv       t0,a1              # t0 = 10
     jal     getMax
-
+    jr      ra                  # devuelve el control a la funcion
 
 # ----------------------- FUNCION BUCKET ----------------------
     .globl getMax
@@ -69,10 +69,10 @@ for:    lw      t0,-24(fp)          # cargar i
         add     t0,a0,t0            # t0 = a0 + 4 * t0
         lw      t0,0(t0)            # t0 = a[i]
         lw      t1,-24(fp)          # t1 = 1
-        bgt     t1,a1,R             # si i > n entonces salta a R
+        bge     t1,a1,R             # si i > n entonces salta a R
         lw      tp,-16(fp)          # cargar max
         blt     t0,tp,for           # si a[i] < max entonces salta a for 
         sw      t0,-16(fp)          # max = a[i]
-        j       for                 # salta a for 
+        j       for                 # salta a jump
 R:      mv      a0,a0               # guarda en valor de retorno en a0
-        jr      ra
+        jr      ra                  # devuelve el control a la funcion
