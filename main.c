@@ -15,7 +15,7 @@ void bucket(int a[], int n){
   int max = getMax(a, n); 
   int bucket[MAX];  
   for (int i = 0; i <= max; i++){  
-    bucket[i] = 0;  
+      bucket[i] = 0;  
   }  
   for (int i = 0; i < n; i++){  
       bucket[a[i]]++;  
